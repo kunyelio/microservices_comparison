@@ -1,0 +1,26 @@
+<server description="Inventory Liberty server">
+
+    <featureManager>
+        <feature>jaxrs-2.1</feature>
+        <feature>jsonp-1.1</feature>
+        <feature>cdi-2.0</feature>
+        <feature>jpa-2.2</feature>
+    </featureManager>
+    <keyStore id="defaultKeyStore" password="ignoreit" />
+    <httpEndpoint host="*" httpPort="${env.SERVER_PORT}" httpsPort="${default.https.port}" id="defaultHttpEndpoint"/>
+
+    <webApplication location="inventories.war" contextRoot="${app.context.root}"/>
+
+    <!-- Derby Library Configuration -->
+    <library id="derbyJDBCLib">
+        <fileset dir="${shared.resource.dir}" includes="derby*.jar"/>
+    </library>
+
+    <!-- Datasource Configuration -->
+    <dataSource id="inventoryDatasource"
+                jndiName="jdbc/inventoryDatasource">
+        <jdbcDriver libraryRef="derbyJDBCLib" />
+        <properties.derby.client databaseName="CarDB" createDatabase="false"
+                                 serverName="${env.DB_HOST}" portNumber="${env.DB_PORT}" user="demo" password="demopwd"/>
+    </dataSource>
+</server>

@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: inventory-service
+  datasource:
+    url: jdbc:derby://${DB_HOST}:${DB_PORT}/CarDB;create=false
+    username: demo
+    password: demopwd
+    driver-class-name: org.apache.derby.jdbc.ClientDriver
+  jpa:
+    hibernate:
+      ddl-auto: none
+
+# HTTP Server
+server:
+  servlet:
+    context-path: /CarInventories
+  port: ${SERVER_PORT}
